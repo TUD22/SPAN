@@ -1,0 +1,11 @@
+Dokonano zmiany w pliku plik.txt o godzinie: 23:30:22
+Dokonano zmiany w pliku plik.txt o godzinie: 23:30:22
+Dokonano zmiany w pliku plik.txt o godzinie: 23:35:22
+Dokonano zmiany w pliku plik.txt o godzinie: 23:35:22
+Dodano plik abc.txt o godzinie: 23:35:39
+Usunięto plik abc.txt o godzinie: 23:35:59
+Dokonano zmiany w pliku plik.txt o godzinie: 23:36:31
+Dokonano zmiany w pliku plik.txt o godzinie: 23:36:31
+Usunięto plik plik.txt o godzinie: 23:36:44
+Dodano plik plik.txt o godzinie: 23:36:56
+Usunięto plik plik.txt o godzinie: 23:37:8
