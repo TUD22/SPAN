@@ -1,5 +1,7 @@
+import path, { resolve } from 'path'
 import fs from 'fs'
 import readline from "readline"
+
 
 const rl=readline.createInterface({
     input: process.stdin,
@@ -17,14 +19,24 @@ function zadajPytanie(pytanie){
 
 async function main(){
     try{
-        const imie = await zadajPytanie("Jak masz na imię")
-        const nazwisko = await zadajPytanie("Jak masz na nazwsko")
-        const wiek = await zadajPytanie("Ile masz lat?")
+        const nazwa = await zadajPytanie("nazwa")
+        
 
         const dane= JSON.stringify({imie, nazwisko, wiek})
-        fs.writeFileSync("log.json", dane, "utf8")
-        const daneJson = fs.readFileSync("log.json", 'utf8')
-        console.log(daneJson)
+       
+        fs.stat(`./${nazwa}`, (err, stats) => {
+
+            if (err) {
+           
+            console.error('Wystąpił błąd podczas odczytu statystyk pliku:', err);
+           
+            return;
+           
+            }
+           
+            console.log(stats);
+           
+           });
     }catch(err){
         console.error(err)
     }finally{
