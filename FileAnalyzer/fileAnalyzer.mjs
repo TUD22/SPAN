@@ -1,7 +1,30 @@
 import path, { resolve } from 'path'
-import fs from 'fs'
+import fs, { readFileSync } from 'fs'
 import readline from "readline"
+import EventEmitter from 'events';
 
+const eventEmitter = new EventEmitter();
+
+eventEmitter.on("start", stats=>{
+    if(stats[0].isFile()){
+        console.log(`Nazwa: ${stats[1]}, rozmiar: ${stats[0].size}, czas modyfikacji: ${stats[0].mtime}, rozszerzenie: ${path.extname(`./${stats[1]}`)}`)
+    }else if(stats[0].isDirectory()){
+        fs.readdirSync(stats[1]).map(fileName=>{
+            fs.stat(`./${stats[1]}/${fileName}`, (err, stat)=>{
+                if (err) {
+                    console.error('Wystąpił błąd podczas odczytu statystyk pliku:', err);
+                    return;
+             }
+             eventEmitter.emit('start', [stat, fileName])
+            })
+        })
+    }
+    eventEmitter.emit("koniec")
+})
+
+eventEmitter.on("koniec", ()=>{
+    rl.close
+})
 
 const rl=readline.createInterface({
     input: process.stdin,
@@ -18,11 +41,10 @@ function zadajPytanie(pytanie){
 }
 
 async function main(){
-    try{
+
         const nazwa = await zadajPytanie("nazwa")
         
 
-        const dane= JSON.stringify({imie, nazwisko, wiek})
        
         fs.stat(`./${nazwa}`, (err, stats) => {
 
@@ -33,15 +55,10 @@ async function main(){
             return;
            
             }
-           
-            console.log(stats);
+            //console.log(stats)
+            eventEmitter.emit("start", [stats, nazwa])
            
            });
-    }catch(err){
-        console.error(err)
-    }finally{
-        rl.close
-    }
     
 }
 

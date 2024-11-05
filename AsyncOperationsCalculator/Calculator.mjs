@@ -22,11 +22,14 @@ async function main(){
         const dzialanie = await zadajPytanie("Podaj działanie")
         const metoda = await zadajPytanie("Podaj metodę działania")
         if(metoda=="callback"){
+            oblicz(l1, l2, dzialanie)
 
-        }else if(metoda="promise"){
-            new Promise((resolve, reject)=>{
-                
-            })
+        }else if(metoda=="promise"){
+            try{
+                oblicz(l1, l2, dzialanie)
+            }catch(err){
+                console.error(err)
+            }
         }else{
             console.log("Nie ma takiej metody")
         }
@@ -40,3 +43,17 @@ async function main(){
 }
 
 main()
+
+function oblicz(l1, l2, dzialanie){
+    l2 = parseInt(l2)
+    l1= parseInt(l1)
+    console.log("liczę")
+    setTimeout(() => {
+        if(dzialanie=="dodaj"){
+            console.log(l1+l2)
+        }else if(dzialanie=="mnoz"){
+            console.log(l2*l1)
+        }
+      }, 5000);
+    
+}
